@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework-02</title>
+</head>
+<body>
+<script>
+	// Задача:
+
+    // 6. Реализовать функцию с тремя параметрами: function mathOperation(arg1, arg2, operation), 
+	// где arg1, arg2 – значения аргументов, operation – строка с названием операции. 
+	// В зависимости от переданного значения операции выполнить одну из арифметических операций (использовать функции из пункта 3) 
+	// и вернуть полученное значение (использовать switch).
+	
+	// Сумма 
+	function mathAdd(a, b) {
+		return +a + +b;
+	}
+	
+	// Разность
+	function mathSub(a, b) {
+		return +a - +b;
+	}
+		
+	// Умножение
+	function mathMult(a, b) {
+		return +a * +b;
+	}
+		
+	// Деление
+	function mathDiv(a, b) {
+		return +a / +b;
+	}
+	
+	function mathOperation(arg1, arg2, operation) {
+		switch (operation) {
+			case '+':
+			case 'add':
+			case 'sum':
+			case 'summ':
+				return mathAdd(arg1, arg2);
+			case '-':
+			case 'sub':
+				return mathSub(arg1, arg2);
+			case '*':
+			case 'mul':
+			case 'mult':
+				return mathMult(arg1, arg2);
+			case '/':
+			case 'div':
+				return mathDiv(arg1, arg2);
+			default:
+				return null;
+		}
+	}
+	
+	console.log(`8 + 3 = ${mathOperation('8', '3', 'summ')}`);
+	console.log(`8 - 3 = ${mathOperation('8', '3', '-')}`);
+	console.log(`8 * 3 = ${mathOperation('8', '3', 'mul')}`);
+	console.log(`8 / 3 = ${mathOperation('8', '3', '/')}`);
+</script>
+</body>
+</html>
