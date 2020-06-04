@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework-03</title>
+</head>
+<body>
+<script>
+	// Задача:
+
+ 	// 1. С помощью цикла while вывести все простые числа в промежутке от 0 до 100.
+	
+	function findSimpleNumbersTill(maxNumber) {
+		let result = [];
+		let n = 0;
+		while (n <= maxNumber) {
+			let isSimple = false;
+			for (let i = 2; i < n; i++){
+				if (n % i) {
+					isSimple = true;
+				} else {
+					isSimple = false;
+					break;
+				}
+			}
+			if (isSimple) result.push(n);
+			n++;
+		}
+		return result;
+	}
+	
+	console.log(findSimpleNumbersTill(100));
+	
+</script>
+</body>
+</html>
