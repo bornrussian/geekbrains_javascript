@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework-03</title>
+</head>
+<body>
+<script>
+	// Задача:
+
+	// 2. С этого урока начинаем работать с функционалом интернет-магазина. 
+	// Предположим, есть сущность корзины. 
+	// Нужно реализовать функционал подсчета стоимости корзины в зависимости от находящихся в ней товаров.
+
+	// 3. Товары в корзине хранятся в массиве. Задачи:
+	// a) Организовать такой массив для хранения товаров в корзине;
+	// b) Организовать функцию countBasketPrice, которая будет считать стоимость корзины.
+	
+
+	let basket = [];
+	
+	function addToBasket(itemName, itemPrice) {
+		basket.push([itemName, +itemPrice])
+	}
+	
+	function deleteFromBasketItemIndex(itemID) {
+		basket.splice(+itemID, 1);
+	}
+	
+	function countBasketPrice() {
+		let result = 0;
+		for (const val of basket) {
+			result += val[1];
+		}
+		return result;
+	}
+
+	addToBasket('Banana', 3);
+	addToBasket('Apple', 5);
+	addToBasket('Peach', 7);
+	
+	console.log(basket +' = total price = '+ countBasketPrice());
+	
+	deleteFromBasketItemIndex(1);
+	
+	console.log(basket +' = total price = '+ countBasketPrice());
+	
+</script>
+</body>
+</html>
