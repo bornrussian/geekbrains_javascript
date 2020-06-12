@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework-05</title>
+    <style>
+		body {
+			font-family: 'Helvetica', 'Arial', sans-serif;
+		}
+        table {
+            border-collapse: collapse;
+        }
+        tr {
+            width: 20px;
+            height: 20px;
+        }
+        td {
+            
+            width: 20px;
+            height: 20px;
+			text-align: center;
+        }
+		.cell-light {
+			border: 1px solid #888;
+			background-color: #ddd;
+		}
+		.cell-dark {
+			border: 1px solid #888;
+			background-color: #aaa;
+		}
+		
+    </style>	
+</head>
+<body>
+<table id="chessboard"></table>
+
+<script>
+
+	// Задача:
+
+ 	// 1. Создать функцию, генерирующую шахматную доску. 
+	// При этом можно использовать любые html-теги по своему желанию. 
+	// Доска должна быть разлинована соответствующим образом, т.е. чередовать черные и белые ячейки. 
+	// Строки должны нумероваться числами от 1 до 8, столбцы – латинскими буквами A, B, C, D, E, F, G, H.
+	
+	const boardLetters = ['A','B','C','D','E','F','G','H'];
+	
+	function drawChessBoard(id) {
+		const chessTable = document.querySelector(id);
+		
+		chessTable.insertAdjacentHTML('afterBegin', '<tr> <td></td> <td>A</td> <td>B</td> <td>C</td> <td>D</td> <td>E</td> <td>F</td> <td>G</td> <td>H</td> <td></td> </tr>');
+	
+		for (let row=8; row>=1; row--) {
+			const chessRow = document.createElement('tr');
+			chessTable.appendChild(chessRow);
+			
+			chessRow.insertAdjacentHTML('afterBegin','<td>'+row+'</td>');
+
+			for (let col=1; col<=8; col++) {
+				const chessCol = document.createElement('td');
+				chessRow.appendChild(chessCol);
+				(col+row)%2 ? chessCol.classList.add('cell-light') : chessCol.classList.add('cell-dark');
+				chessCol.setAttribute('id','cell-id-'+boardLetters[col-1]+row);
+			}
+			
+			chessRow.insertAdjacentHTML('beforeEnd','<td>'+row+'</td>');
+		}
+
+		chessTable.insertAdjacentHTML('beforeEnd', '<tr> <td></td> <td>A</td> <td>B</td> <td>C</td> <td>D</td> <td>E</td> <td>F</td> <td>G</td> <td>H</td> <td></td> </tr>');
+	}
+	
+	drawChessBoard('#chessboard');
+	
+	
+	
+	// Задача:
+	
+	// 2. Заполнить созданную таблицу буквами, отвечающими за шахматную фигуру, например К – король, Ф – ферзь и т.п., 
+	// причем все фигуры должны стоять на своих местах и быть соответственно черными и белыми.
+	
+	document.getElementById('cell-id-A1').innerHTML = '<font color=white>Л</font>'; // Белая ладья
+	document.getElementById('cell-id-B1').innerHTML = '<font color=white>Г</font>'; // Белый конь
+ 	document.getElementById('cell-id-C1').innerHTML = '<font color=white>С</font>'; // Белый слон
+	document.getElementById('cell-id-D1').innerHTML = '<font color=white>Q</font>'; // Белая королева
+	document.getElementById('cell-id-E1').innerHTML = '<font color=white>К</font>'; // Белый король
+	document.getElementById('cell-id-F1').innerHTML = '<font color=white>С</font>'; // Белый слон
+	document.getElementById('cell-id-G1').innerHTML = '<font color=white>Г</font>'; // Белый конь
+	document.getElementById('cell-id-H1').innerHTML = '<font color=white>Л</font>'; // Белая ладья
+	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'2').innerHTML = '<font color=white>п</font>'); // Белые пешки    
+	
+	document.getElementById('cell-id-A8').innerHTML = '<font color=black>Л</font>'; // Черная ладья
+	document.getElementById('cell-id-B8').innerHTML = '<font color=black>Г</font>'; // Черный конь
+ 	document.getElementById('cell-id-C8').innerHTML = '<font color=black>С</font>'; // Черный слон
+	document.getElementById('cell-id-D8').innerHTML = '<font color=black>Q</font>'; // Черная королева
+	document.getElementById('cell-id-E8').innerHTML = '<font color=black>К</font>'; // Черный король
+	document.getElementById('cell-id-F8').innerHTML = '<font color=black>С</font>'; // Черный слон
+	document.getElementById('cell-id-G8').innerHTML = '<font color=black>Г</font>'; // Черный конь
+	document.getElementById('cell-id-H8').innerHTML = '<font color=black>Л</font>'; // Черный ладья
+	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'7').innerHTML = '<font color=black>п</font>'); // Черные пешки   	
+	
+	
+	//Задача:
+	// 3. *Заменить буквы, обозначающие фигуры, картинками.
+
+	document.getElementById('cell-id-A1').innerHTML = '&#9814;'; // Белая ладья
+	document.getElementById('cell-id-B1').innerHTML = '&#9816;'; // Белый конь
+	document.getElementById('cell-id-C1').innerHTML = '&#9815;'; // Белый слон
+	document.getElementById('cell-id-D1').innerHTML = '&#9813;'; // Белая королева
+	document.getElementById('cell-id-E1').innerHTML = '&#9812;'; // Белый король
+	document.getElementById('cell-id-F1').innerHTML = '&#9815;'; // Белый слон
+	document.getElementById('cell-id-G1').innerHTML = '&#9816;'; // Белый конь
+	document.getElementById('cell-id-H1').innerHTML = '&#9814;'; // Белая ладья
+	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'2').innerHTML = '&#9817;'); // Белые пешки
+
+	document.getElementById('cell-id-A8').innerHTML = '&#9820;'; // Черная ладья
+	document.getElementById('cell-id-B8').innerHTML = '&#9822;'; // Черный конь
+	document.getElementById('cell-id-C8').innerHTML = '&#9821;'; // Черный слон
+	document.getElementById('cell-id-D8').innerHTML = '&#9819;'; // Черная королева
+	document.getElementById('cell-id-E8').innerHTML = '&#9818;'; // Черный король
+	document.getElementById('cell-id-F8').innerHTML = '&#9821;'; // Черный слон
+	document.getElementById('cell-id-G8').innerHTML = '&#9822;'; // Черный конь
+	document.getElementById('cell-id-H8').innerHTML = '&#9820;'; // Черная ладья
+	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'7').innerHTML = '&#9823;'); // Черные пешки
+
+	
+</script>
+</body>
+</html>
