@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework-04</title>
+</head>
+<body>
+<script>
+	// Задача:
+
+ 	// 2. Для игры, реализованной на уроке, добавить
+	// - передвижение по WSAD, а то неудобно на ноутбуке управлять через 2, 4, 6, 8
+	// - ограничение возможности выхода за границы карты
+	// - историю перемещений
+	// - цель игры :-)
+	
+	const settings = {
+		rowCount: 10,
+		colCount: 10,
+		startPositionX: 0,
+		startPositionY: 0,
+	};
+	
+	const prize = {
+		x: null,
+		y: null,
+		
+		placeRandom(params) {
+			this.x = Math.floor(Math.random() * (params.colCount-1)) + 1;
+			this.y = Math.floor(Math.random() * (params.rowCount-1)) + 1;
+		}
+	}
+
+	const player = {
+		x: null,
+		y: null,
+		minX: null,
+		minY: null,
+		maxX: null,
+		maxY: null,
+		visitedXY: null,
+
+		init(params) {
+			this.x = params.startX;
+			this.y = params.startY;
+			this.minX = 0;
+			this.minY = 0;
+			this.maxX = params.colCount-1;
+			this.maxY = params.rowCount-1;
+			this.visitedXY = [];
+		},
+
+		move(direction) {
+			switch (direction) {
+				case 'w':
+					if (this.y > this.minY)	{ this.visitedXY.push(this.x*(this.maxX+1)+this.y); this.y--; };
+					break;
+				case 's':
+					if (this.y < this.maxY) { this.visitedXY.push(this.x*(this.maxX+1)+this.y); this.y++; };
+					break;
+				case 'a':
+					if (this.x > this.minX)	{ this.visitedXY.push(this.x*(this.maxX+1)+this.y); this.x--; };
+					break;
+				case 'd':
+					if (this.x < this.maxY) { this.visitedXY.push(this.x*(this.maxX+1)+this.y); this.x++; };
+					break;
+			}
+		}
+	};
+
+	const game = {
+		settings,
+		player,
+		prize,
+		run() {
+			this.player.init({
+				startX : this.settings.startPositionX, 
+				startY : this.settings.startPositionY,
+				colCount : this.settings.colCount,
+				rowCount : this.settings.rowCount,
+			});
+			
+			this.prize.placeRandom({
+				colCount : this.settings.colCount,
+				rowCount : this.settings.rowCount,
+			});
+
+			while (true) {
+				this.render();
+
+				if ((this.player.x === this.prize.x) && (this.player.y === this.prize.y)) {
+					return alert('УРА, Вы нашли приз!');
+				}
+
+				const action = this.getAction();
+
+				if (action == 'q') {
+					return alert('До свидания!');
+				}
+				
+				this.player.move(action);
+				
+			}
+		},
+		render() {
+			let map = '';
+
+			for (let row = 0; row < this.settings.rowCount; row++) {
+				for (let col = 0; col < this.settings.colCount; col++) {
+					if (this.player.y == this.prize.y && this.player.x == this.prize.x) { // если приз был найден
+						if (this.player.y === row && this.player.x === col) {
+							map += 'Ё ';
+						} else {
+							map += '. ';
+						}
+					} else {
+						if (this.player.y === row && this.player.x === col) { // если приз еще не нашли
+							map += 'x ';
+						} else if (this.player.visitedXY.includes(col*this.settings.colCount+row)){
+							map += '. ';
+						} else {
+							map += '? ';
+						}
+					}
+
+				}
+				map += '\n';
+			}
+
+			console.clear();
+			console.log(map);
+			//console.log(`player location: ${this.player.x},${this.player.y}`);
+			//console.log(`prize location: ${this.prize.x},${this.prize.y}`);
+		},
+		getAction() {
+			const availableActions = ['q', 'w', 's', 'a', 'd'];
+
+			while (true) {
+				const action = prompt('Найдите приз. Введите wsad для перемещения, либо q для выхода');
+
+				if (!availableActions.includes(action)) {
+					alert(`Введите одно из действий ${availableActions.join(', ')}.`);
+					continue;
+				}
+
+				return action;
+			}
+		}
+	};
+
+	game.run();
+
+</script>
+</body>
+</html>
