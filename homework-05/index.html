@@ -89,13 +89,18 @@
 	//Задача:
 	// 3. *Заменить буквы, обозначающие фигуры, картинками.
 	
-	const whiteFigures = {A1:'&#9814;',B1:'&#9816;',C1:'&#9815;',D1:'&#9813;',E1:'&#9812;',F1:'&#9816;',G1:'&#9816;',H1:'&#9814;'} // Белые фигуры
-	for (const cell in whiteFigures) { document.getElementById('cell-id-'+cell).innerHTML = whiteFigures[cell]; }
-	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'2').innerHTML = '&#9817;'); // Белые пешки   	
+	const whiteRook='&#9814;', whiteKnight='&#9816;', whiteBishop='&#9815;', whiteQueen='&#9813;', whiteKing='&#9812;', whitePaun='&#9817;';
+	const blackRook='&#9820;', blackKnight='&#9822;', blackBishop='&#9821;', blackQueen='&#9819;', blackKing='&#9818;', blackPaun='&#9823;';
+	
+	function putChessFigureToCell (figure, cell) { document.getElementById('cell-id-'+cell).innerHTML = figure;	}
+	
+	const whiteFigures = {A1:whiteRook, B1:whiteKnight, C1:whiteBishop, D1:whiteQueen, E1:whiteKing, F1:whiteBishop, G1:whiteKnight, H1:whiteRook,
+						  A2:whitePaun, B2:whitePaun, C2:whitePaun, D2: whitePaun, E2: whitePaun, F2: whitePaun, G2: whitePaun, H2:whitePaun };
+	for (const cell in whiteFigures) { putChessFigureToCell(whiteFigures[cell], cell); }
 
-	const blackFigures = {A8:'&#9820;',B8:'&#9822;',C8:'&#9821;',D8:'&#9819;',E8:'&#9818;',F8:'&#9821;',G8:'&#9822;', H8:'&#9820;'}; // Черные фигуры
-	for (const cell in blackFigures) { document.getElementById('cell-id-'+cell).innerHTML = blackFigures[cell]; }
-	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'7').innerHTML = '&#9823;'); // Черные пешки   	
+	const blackFigures = {A8:blackRook, B8:blackKnight, C8:blackBishop, D8:blackQueen, E8:blackKing, F8:blackBishop, G8:blackKnight, H8:blackRook,
+						  A7:blackPaun, B7:blackPaun, C7:blackPaun, D7:blackPaun, E7:blackPaun, F7:blackPaun, G7:blackPaun, H7:blackPaun };
+	for (const cell in blackFigures) { putChessFigureToCell(blackFigures[cell], cell); }
 	
 </script>
 </body>
