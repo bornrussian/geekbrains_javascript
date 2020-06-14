@@ -77,11 +77,11 @@
 	// 2. Заполнить созданную таблицу буквами, отвечающими за шахматную фигуру, например К – король, Ф – ферзь и т.п., 
 	// причем все фигуры должны стоять на своих местах и быть соответственно черными и белыми.
 	
-	const whiteLetters = {A1:'Л',B1:'Г',C1:'С',D1:'Q',E1:'К',F1:'С',G1:'Г',H1:'Л'} 
-	for (const cell in whiteLetters) { document.getElementById('cell-id-'+cell).innerHTML = '<font color=white>'+whiteLetters[cell]+'</font>'; } 
-	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'2').innerHTML = '<font color=white>п</font>'); 
+	const whiteLetters = {A1:'Л',B1:'Г',C1:'С',D1:'Q',E1:'К',F1:'С',G1:'Г',H1:'Л'} // Белые фигуры-буквы 
+	for (const cell in whiteLetters) { document.getElementById('cell-id-'+cell).innerHTML = '<font color=white>'+whiteLetters[cell]+'</font>'; }
+	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'2').innerHTML = '<font color=white>п</font>'); // Белые пешки   	 
 	
-	const blackLetters = {A8:'Л',B8:'Г',C8:'С',D8:'Q',E8:'К',F8:'С',G8:'Г',H8:'Л'} 
+	const blackLetters = {A8:'Л',B8:'Г',C8:'С',D8:'Q',E8:'К',F8:'С',G8:'Г',H8:'Л'} // Черные фигуры-буквы 
 	for (const cell in blackLetters) { document.getElementById('cell-id-'+cell).innerHTML = '<font color=black>'+blackLetters[cell]+'</font>'; } 
 	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'7').innerHTML = '<font color=black>п</font>'); // Черные пешки   	
 	
@@ -89,13 +89,13 @@
 	//Задача:
 	// 3. *Заменить буквы, обозначающие фигуры, картинками.
 	
-	const whiteFigures = {A1:'&#9814;',B1:'&#9816;',C1:'&#9815;',D1:'&#9813;',E1:'&#9812;',F1:'&#9816;',G1:'&#9816;',H1:'&#9814;'}
+	const whiteFigures = {A1:'&#9814;',B1:'&#9816;',C1:'&#9815;',D1:'&#9813;',E1:'&#9812;',F1:'&#9816;',G1:'&#9816;',H1:'&#9814;'} // Белые фигуры
 	for (const cell in whiteFigures) { document.getElementById('cell-id-'+cell).innerHTML = whiteFigures[cell]; }
-	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'2').innerHTML = '&#9817;');
+	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'2').innerHTML = '&#9817;'); // Белые пешки   	
 
-	const blackFigures = {A8:'&#9820;',B8:'&#9822;',C8:'&#9821;',D8:'&#9819;',E8:'&#9818;',F8:'&#9821;',G8:'&#9822;', H8:'&#9820;'};
+	const blackFigures = {A8:'&#9820;',B8:'&#9822;',C8:'&#9821;',D8:'&#9819;',E8:'&#9818;',F8:'&#9821;',G8:'&#9822;', H8:'&#9820;'}; // Черные фигуры
 	for (const cell in blackFigures) { document.getElementById('cell-id-'+cell).innerHTML = blackFigures[cell]; }
-	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'7').innerHTML = '&#9823;');
+	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'7').innerHTML = '&#9823;'); // Черные пешки   	
 	
 </script>
 </body>
