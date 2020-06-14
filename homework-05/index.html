@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework-05</title>
+    <style>
+		body {
+			font-family: 'Helvetica', 'Arial', sans-serif;
+		}
+        table {
+            border-collapse: collapse;
+        }
+        tr {
+            width: 20px;
+            height: 20px;
+        }
+        td {
+            
+            width: 20px;
+            height: 20px;
+			text-align: center;
+        }
+		.cell-light {
+			border: 1px solid #888;
+			background-color: #ddd;
+		}
+		.cell-dark {
+			border: 1px solid #888;
+			background-color: #aaa;
+		}
+		
+    </style>	
+</head>
+<body>
+<table id="chessboard"></table>
+
+<script>
+
+	// Задача:
+
+ 	// 1. Создать функцию, генерирующую шахматную доску. 
+	// При этом можно использовать любые html-теги по своему желанию. 
+	// Доска должна быть разлинована соответствующим образом, т.е. чередовать черные и белые ячейки. 
+	// Строки должны нумероваться числами от 1 до 8, столбцы – латинскими буквами A, B, C, D, E, F, G, H.
+	
+	const boardLetters = ['A','B','C','D','E','F','G','H'];
+	
+	function drawChessBoard(id) {
+		const chessTable = document.querySelector(id);
+		
+		chessTable.insertAdjacentHTML('afterBegin', '<tr> <td></td> <td>A</td> <td>B</td> <td>C</td> <td>D</td> <td>E</td> <td>F</td> <td>G</td> <td>H</td> <td></td> </tr>');
+	
+		for (let row=8; row>=1; row--) {
+			const chessRow = document.createElement('tr');
+			chessTable.appendChild(chessRow);
+			
+			chessRow.insertAdjacentHTML('afterBegin','<td>'+row+'</td>');
+
+			for (let col=1; col<=8; col++) {
+				const chessCol = document.createElement('td');
+				chessRow.appendChild(chessCol);
+				(col+row)%2 ? chessCol.classList.add('cell-light') : chessCol.classList.add('cell-dark');
+				chessCol.setAttribute('id','cell-id-'+boardLetters[col-1]+row);
+			}
+			
+			chessRow.insertAdjacentHTML('beforeEnd','<td>'+row+'</td>');
+		}
+
+		chessTable.insertAdjacentHTML('beforeEnd', '<tr> <td></td> <td>A</td> <td>B</td> <td>C</td> <td>D</td> <td>E</td> <td>F</td> <td>G</td> <td>H</td> <td></td> </tr>');
+	}
+	
+	drawChessBoard('#chessboard');
+	
+	
+	
+	// Задача:
+	// 2. Заполнить созданную таблицу буквами, отвечающими за шахматную фигуру, например К – король, Ф – ферзь и т.п., 
+	// причем все фигуры должны стоять на своих местах и быть соответственно черными и белыми.
+	
+	const whiteLetters = {A1:'Л',B1:'Г',C1:'С',D1:'Q',E1:'К',F1:'С',G1:'Г',H1:'Л'} // Белые фигуры-буквы 
+	for (const cell in whiteLetters) { document.getElementById('cell-id-'+cell).innerHTML = '<font color=white>'+whiteLetters[cell]+'</font>'; }
+	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'2').innerHTML = '<font color=white>п</font>'); // Белые пешки   	 
+	
+	const blackLetters = {A8:'Л',B8:'Г',C8:'С',D8:'Q',E8:'К',F8:'С',G8:'Г',H8:'Л'} // Черные фигуры-буквы 
+	for (const cell in blackLetters) { document.getElementById('cell-id-'+cell).innerHTML = '<font color=black>'+blackLetters[cell]+'</font>'; } 
+	boardLetters.forEach(letter => document.getElementById('cell-id-'+letter+'7').innerHTML = '<font color=black>п</font>'); // Черные пешки   	
+	
+	
+	//Задача:
+	// 3. *Заменить буквы, обозначающие фигуры, картинками.
+	
+	const whiteRook='&#9814;', whiteKnight='&#9816;', whiteBishop='&#9815;', whiteQueen='&#9813;', whiteKing='&#9812;', whitePaun='&#9817;';
+	const blackRook='&#9820;', blackKnight='&#9822;', blackBishop='&#9821;', blackQueen='&#9819;', blackKing='&#9818;', blackPaun='&#9823;';
+	
+	function putChessFigureToCell (figure, cell) { document.getElementById('cell-id-'+cell).innerHTML = figure;	}
+	
+	const whiteFigures = {A1:whiteRook, B1:whiteKnight, C1:whiteBishop, D1:whiteQueen, E1:whiteKing, F1:whiteBishop, G1:whiteKnight, H1:whiteRook,
+						  A2:whitePaun, B2:whitePaun, C2:whitePaun, D2: whitePaun, E2: whitePaun, F2: whitePaun, G2: whitePaun, H2:whitePaun };
+	for (const cell in whiteFigures) { putChessFigureToCell(whiteFigures[cell], cell); }
+
+	const blackFigures = {A8:blackRook, B8:blackKnight, C8:blackBishop, D8:blackQueen, E8:blackKing, F8:blackBishop, G8:blackKnight, H8:blackRook,
+						  A7:blackPaun, B7:blackPaun, C7:blackPaun, D7:blackPaun, E7:blackPaun, F7:blackPaun, G7:blackPaun, H7:blackPaun };
+	for (const cell in blackFigures) { putChessFigureToCell(blackFigures[cell], cell); }
+	
+</script>
+</body>
+</html>
